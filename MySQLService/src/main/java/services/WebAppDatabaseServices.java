@@ -2,11 +2,15 @@ package services;
 
 import repositories.MySQLRepository;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import dataModels.UserDataModel;
+import dataModels.AdsModel;
+import dataModels.ProfileDataModel;
 
 @Service("DatabaseServices")
 public class WebAppDatabaseServices {
@@ -23,7 +27,23 @@ public class WebAppDatabaseServices {
 		return mySQLRepository.InsertOnePersonRecord(userDataModel);
 	}
 
-	public boolean UpdataOnePersonProfile_PassWord(String email, String PassWord) {
-		return mySQLRepository.UpdataOnePersonProfile_PassWord(email, PassWord);
+	public boolean UpdataPassWord(String email, String oldPassWord, String newPassWord, String conformNewPassword) {
+		return mySQLRepository.UpdataPassWord(email, oldPassWord, newPassWord, conformNewPassword);
+	}
+
+	public boolean Login(String email, String PassWord) {
+		return mySQLRepository.Login(email, PassWord);
+	}
+
+	public boolean PostAd(String PostEmail, String Category, String Contents, String ContactEmail, Long ContactCell) {
+		return mySQLRepository.PostAd(PostEmail, Category, Contents, ContactEmail, ContactCell);
+	}
+
+	public ArrayList<AdsModel> FindAd(String Table, String Category) {
+		return mySQLRepository.FindAd(Table, Category);
+	}
+
+	public ProfileDataModel SearchAdofOneUser(String PostEmail) {
+		return mySQLRepository.SearchAdofOneUser(PostEmail);
 	}
 }
