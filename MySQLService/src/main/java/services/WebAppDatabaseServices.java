@@ -46,4 +46,8 @@ public class WebAppDatabaseServices {
 	public ProfileDataModel SearchAdofOneUser(String PostEmail) {
 		return mySQLRepository.SearchAdofOneUser(PostEmail);
 	}
+
+	public boolean DeleteOneAd(int PostID, String Category) {
+		return mySQLRepository.DeleteOneAd(PostID, Category);
+	}
 }

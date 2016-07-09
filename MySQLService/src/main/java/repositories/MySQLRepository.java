@@ -110,9 +110,12 @@ public class MySQLRepository {
 				n = rand.nextInt(100000) + 1;
 				rs = st.executeQuery("SELECT * FROM " + table + " WHERE PostID = '" + n + "'");
 			} while (rs.wasNull());
-
+			System.out.println("INSERT INTO " + table
+					+ "(PostID, PostEmail, Category, Contents, ContactEmail, ContactCell, PostDate) VALUES ('" + n
+					+ "','" + PostEmail + "','" + Category + "','" + Contents + "','" + ContactEmail + "','"
+					+ ContactCell + "','" + date + "')");
 			st.executeUpdate("INSERT INTO " + table
-					+ " (PostID, PostEmail, Category, Contents, ContactEmail, ContactCell, PostDate) VALUES ( '" + n
+					+ "(PostID, PostEmail, Category, Contents, ContactEmail, ContactCell, PostDate) VALUES ( '" + n
 					+ "','" + PostEmail + "','" + Category + "','" + Contents + "','" + ContactEmail + "','"
 					+ ContactCell + "','" + date + "')");
 
@@ -130,7 +133,7 @@ public class MySQLRepository {
 			while (rs.next()) {
 				System.out.print("Column 1 returned: ");
 				AdsModel adsModel = new AdsModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5), rs.getLong(6), rs.getDate(7));
+						rs.getString(5), rs.getLong(6), rs.getDate(7), Table);
 				list.add(adsModel);
 				System.out.println(rs.getDate(7));
 			}
@@ -158,7 +161,7 @@ public class MySQLRepository {
 				while (rs.next()) {
 					System.out.print("Column 1 returned: ");
 					adsModel = new AdsModel(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-							rs.getString(5), rs.getLong(6), rs.getDate(7));
+							rs.getString(5), rs.getLong(6), rs.getDate(7), s);
 					list.add(adsModel);
 				}
 			}
@@ -174,6 +177,21 @@ public class MySQLRepository {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	public boolean DeleteOneAd(int PostID, String Table) {
+		try {
+			System.out.print("DELETE FROM " + Table + " WHERE PostID='" + PostID + "'");
+			int num = st.executeUpdate("DELETE FROM " + Table + " WHERE PostID='" + PostID + "'");
+			if (num == 1) {
+				return true;
+			}
+			System.out.print("yes");
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 

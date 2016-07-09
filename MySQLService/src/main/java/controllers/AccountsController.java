@@ -106,4 +106,14 @@ public class AccountsController {
 		return normalHttpResponse;
 	}
 
+	@RequestMapping(value = "/DeleteAd", method = RequestMethod.POST)
+	public @ResponseBody NormalHttpResponse PostAds(@RequestParam("PostID") int PostID,
+			@RequestParam("Table") String Table) {
+		System.out.println(Table);
+		NormalHttpResponse normalHttpResponse = new NormalHttpResponse();
+		normalHttpResponse.setSucceed(webAppDatabaseServices.DeleteOneAd(PostID, Table));
+		normalHttpResponse.setInformation("Null");
+		return normalHttpResponse;
+	}
+
 }

@@ -8,9 +8,12 @@ public class AdsModel {
 	private String Category;
 	private String Contents;
 	private String ContactEmail;
+	private String Table;
+	private Long ContactCell;
+	private Date PostDate;
 
 	public AdsModel(int postID, String postEmail, String category, String contents, String contactEmail,
-			Long contactCell, Date postDate) {
+			Long contactCell, Date postDate, String table) {
 		super();
 		PostID = postID;
 		PostEmail = postEmail;
@@ -19,6 +22,7 @@ public class AdsModel {
 		ContactEmail = contactEmail;
 		ContactCell = contactCell;
 		PostDate = postDate;
+		Table = table;
 	}
 
 	public int getPostID() {
@@ -77,7 +81,12 @@ public class AdsModel {
 		PostDate = postDate;
 	}
 
-	private Long ContactCell;
-	private Date PostDate;
+	public String getTable() {
+		return Table;
+	}
+
+	public void setTable(String table) {
+		this.Table = table;
+	}
 
 }
